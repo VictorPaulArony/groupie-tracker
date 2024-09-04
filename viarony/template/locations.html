@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Details</title>
+</head>
+<body>
+    <div class="band-info">
+        {{ if .Artist }}
+        <div class="artist-info">
+            <img src="{{ .Artist.Image }}" alt="Image of {{ .Artist.Name }}">
+            <h1>{{ .Artist.Name }}</h1>
+        </div>
+        {{ end }}
+    
+        {{ if .Artist.Members }}
+        <div class="members-info">
+            <h2>Band Members</h2>
+            <ul class="members-list">
+                {{ range .Artist.Members }}
+                <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+    
+    {{ if .Relation.DatesLocations }}
+    <div class="table-container">
+        <h2>Tour Dates and Locations</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Dates</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $location, $dates := .Relation.DatesLocations }}
+                <tr>
+                    <td>{{ $location }}</td>
+                    <td>
+                        {{ range $dates }}
+                        <div>{{ . }}</div>
+                        {{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+    {{ else }}
+    <p>No tour information available.</p>
+    {{ end }}
+</body>
+</html>
