@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists and Locations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .artist, .location {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px #aaa;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+        h2, h3 {
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Artists</h1>
+    {{ range . }}
+        <div class="card-grid">
+            <h2>{{.Name}}</h2>
+            <div class="image">
+                <img src="{{.Image}}" alt="Image of {{.Name}}">
+            </div>
+            <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
+            <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+            <p><strong>Members: </strong> {{.Members}}</p>
+            <p><strong>Details:</strong> <a href="/locations/{{.ID}}">View Details</a></p>
+        </div>
+    {{ end }}
+</body>
+</html>
