@@ -49,7 +49,6 @@ type Relation struct {
 
 /*******************************************************************************************/
 //the unmarshaling of the APIs data using get method
-
 func GetApis() ApiIndex {
 	url := "https://groupietrackers.herokuapp.com/api"
 	res, err := http.Get(url)
@@ -124,7 +123,7 @@ func GetDates(url string) (Date, error) {
 		return Date{}, err
 	}
 
-	log.Println("Response Body:", string(body)) // Log the response for debugging
+	// log.Println("Response Body:", string(body)) // Log the response for debugging
 
 	var date Date
 	err = json.Unmarshal(body, &date)
@@ -257,8 +256,12 @@ func LocationPageHandler(w http.ResponseWriter, r *http.Request) {
 //the main function to sarve and listen to the http/net requests
 
 func main() {
+	file := http.FileServer(http.Dir("./static"))
+	http.Handle("/static/", http.StripPrefix("/static/", file))
+
 	http.HandleFunc("/", ArtistPageHandler)
 	http.HandleFunc("/locations/", LocationPageHandler)
+	log.Println("Server is running on port http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

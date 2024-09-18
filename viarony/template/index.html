@@ -5,41 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artists and Locations</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0c0c0c; 
+            background-color: #020202da; 
+            overflow-x: hidden;
         }
-        .artist, .location {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px #aaa;
+
+        /* Static Background Image */
+        .backgroundImage {
+            /* background-image: url("http://77.237.238.0:8096/Items/6689777a729440ce971385c4ceaed077/Images/Backdrop/0?tag=e4aa60c91315671cb7a61a2ec5659b99&maxWidth=1440&quality=80"); */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            filter: brightness(10%);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
-        img {
-            max-width: 200px;
+
+        /* Content Container */
+        .content {
+            /* padding: 100px; */
+            margin: 0 auto;
+            max-width: 80%;
+            padding: 50px;
+            position: relative;
+            justify-content: space-around;
+            z-index: 1;
+        }
+
+        /* Card Grid for Artists */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            
+        }
+
+        /* Card Styles */
+        .card-grid > div {
+            background: rgba(19, 18, 19, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgb(4, 155, 243);
+            overflow: hidden;
+            color: beige;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Card Hover Effect */
+        .card-grid > div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Styles */
+        .card-grid img {
+            max-width: 100%;
             height: auto;
-            display: block;
-            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        h2, h3 {
-            margin: 0 0 10px 0;
+
+        /* Heading and Text */
+        h1 {
+            text-align: center;
+            color: #abb4b3;
+            margin-bottom: 40px;
+            font-size: 3.5rem;
+            font-weight: bolder;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            color: #c7baba;
+            text-shadow: 0 1px rgb(4, 155, 243);
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+            color: #bbb0b0;
+        }
+
+        /* Link Styles */
+        a {
+            color: #3498db; /* Bright blue for links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Artists</h1>
-    {{ range . }}
+    <div class="backgroundImage"></div>
+    <div class="content">
+        <h1>ARTISTS</h1>
+
         <div class="card-grid">
-            <h2>{{.Name}}</h2>
-            <div class="image">
-                <img src="{{.Image}}" alt="Image of {{.Name}}">
+        {{ range . }}
+            <div>
+                <h2>{{.Name}}</h2>
+                <div class="image">
+                    <img src="{{.Image}}" alt="Image of {{.Name}}">
+                </div>
+                <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
+                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+                <p><strong>Members:</strong> {{.Members}}</p>
+                <p><strong>Details:</strong> <a href="/locations/{{.ID}}">View Details</a></p>
             </div>
-            <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
-            <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
-            <p><strong>Members: </strong> {{.Members}}</p>
-            <p><strong>Details:</strong> <a href="/locations/{{.ID}}">View Details</a></p>
+        {{ end }}
         </div>
-    {{ end }}
+    </div>
 </body>
 </html>

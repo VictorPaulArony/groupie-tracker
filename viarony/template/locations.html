@@ -4,54 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location Details</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #ececec; /* Light color for text */
+            background-color: rgba(10, 10, 10, 0.9); /* Dark background with opacity */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Static Background Image */
+        .backgroundImage {
+            /* background-image: url("http://77.237.238.0:8096/Items/6689777a729440ce971385c4ceaed077/Images/Backdrop/0?tag=e4aa60c91315671cb7a61a2ec5659b99&maxWidth=1440&quality=80"); */
+            background-size: cover;
+            background-attachment: fixed; /* Keeps the background static */
+            background-position: center;
+            filter: brightness(5%);
+            width: 100%;
+            height: 100%; /* Full viewport height */
+            position: fixed; /* Fixed to make the content scroll over it */
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pushes the background behind content */
+            opacity: 0.9; /* Opacity for background image */
+        }
+
+        /* Content Container */
+        .content {
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Keeps the content above the background */
+        }
+
+        .band-info, #locations, .table-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(19, 18, 19, 0.8); /* Dark background with slight opacity */
+            box-shadow: 0 4px 8px rgba(1, 125, 197, 0.3);
+            border-radius: 10px;
+        }
+
+        .artist-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .artist-info img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(1, 125, 197, 0.3);
+        }
+
+        .artist-info h1 {
+            font-size: 2.2rem;
+            color: #0cc0f7; /* Light blue color for better contrast */
+            margin-bottom: 10px;
+        }
+
+        .members-info h2, #locations h2, .table-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0cc0f7; /* Light blue color */
+            border-bottom: 2px solid #716d72;
+            padding-bottom: 10px;
+        }
+
+        .members-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .members-list li {
+            font-size: 1.2rem;
+            padding: 8px;
+            margin-bottom: 10px;
+            background: #bdb7be; /* Dark maroon background */
+            color: #080808; /* Light text color */
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .members-list li:hover {
+            background: #535153; /* Lighter maroon on hover */
+        }
+
+        #locations ul, .table-container table tbody {
+            list-style: none;
+            padding: 0;
+        }
+
+        #locations ul li, .table-container table th, .table-container table td {
+            font-size: 1.2rem;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #b7acb9; /* Dark maroon background */
+            color: #070707; /* Light text color */
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        #locations ul li:hover, .table-container table tbody tr:hover {
+            background: #776e79; /* Lighter maroon on hover */
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .table-container table th {
+            font-size: 1.2rem;
+            color: #030303; /* Light blue color */
+            border-bottom: 5px solid #0a0a0a; /* Maroon border */
+        }
+
+        .table-container table td {
+            padding: 12px;
+            border-bottom: 5px solid #080808;
+        }
+
+        .table-container table td div {
+            padding: 8px 0;
+        }
+
+        a {
+            color: #05bcf3; /* Bright blue for links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .band-info, #locations, .table-container {
+                padding: 20px;
+            }
+
+            .artist-info h1 {
+                font-size: 2rem;
+            }
+
+            .members-info h2, #locations h2, .table-container h2 {
+                font-size: 1.3rem;
+            }
+
+            .members-list li, #locations ul li, .table-container table th, .table-container table td {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="band-info">
-        {{ if .Artist }}
-        <div class="artist-info">
-            <img src="{{ .Artist.Image }}" alt="Image of {{ .Artist.Name }}">
-            <h1>{{ .Artist.Name }}</h1>
+    <div class="backgroundImage"></div>
+    <div class="content">
+        <div class="band-info">
+            {{ if .Artist }}
+            <div class="artist-info">
+                <img src="{{ .Artist.Image }}" alt="Image of {{ .Artist.Name }}">
+                <h1>{{ .Artist.Name }}</h1>
+            </div>
+            {{ end }}
+        
+            {{ if .Artist.Members }}
+            <div class="members-info">
+                <h2>Band Members</h2>
+                <ul class="members-list">
+                    {{ range .Artist.Members }}
+                    <li><strong>{{.}}</strong></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
         </div>
-        {{ end }}
-    
-        {{ if .Artist.Members }}
-        <div class="members-info">
-            <h2>Band Members</h2>
-            <ul class="members-list">
-                {{ range .Artist.Members }}
-                <li>{{ . }}</li>
+
+        <div id="locations">
+            {{ if .Location.Locations }}
+            <h2>Locations to Visit</h2>
+            <ul>
+                {{ range .Location.Locations }}
+                <li><strong>{{.}}</strong></li>
                 {{ end }}
             </ul>
+            {{ end }}
         </div>
+        
+        {{ if .Relation.DatesLocations }}
+        <div class="table-container">
+            <h2>Performance Dates and Locations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Dates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range $location, $dates := .Relation.DatesLocations }}
+                    <tr>
+                        <td>{{ $location }}</td>
+                        <td>
+                            {{ range $dates }}
+                            <div>{{ . }}</div>
+                            {{ end }}
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Go Back: </strong><a href="/">Go Back</a></p>
+        {{ else }}
+        <p>Information unavailable.</p>
         {{ end }}
     </div>
-    
-    {{ if .Relation.DatesLocations }}
-    <div class="table-container">
-        <h2>Tour Dates and Locations</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Location</th>
-                    <th>Dates</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{ range $location, $dates := .Relation.DatesLocations }}
-                <tr>
-                    <td>{{ $location }}</td>
-                    <td>
-                        {{ range $dates }}
-                        <div>{{ . }}</div>
-                        {{ end }}
-                    </td>
-                </tr>
-                {{ end }}
-            </tbody>
-        </table>
-    </div>
-    {{ else }}
-    <p>No tour information available.</p>
-    {{ end }}
 </body>
 </html>
