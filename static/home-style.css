@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    element {
+        background: url("http://77.237.238.0:8096/Items/6689777a729440ce971385c4ceaed077/Images/Backdrop/0?tag=e4aa60c91315671cb7a61a2ec5659b99&maxWidth=1440&quality=80");
+    }
+}
+.artist, .location {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px #aaa;
+}
+img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+h2, h3 {
+    margin: 0 0 10px 0;
+}
