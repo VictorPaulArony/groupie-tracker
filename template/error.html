@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{.Code}}</title>
+   <link rel="stylesheet" href="/static/error.css">
+</head>
+<body>
+    <div class="heading"><h1>ARTISTS</h1>
+        <div class="mode">
+            <button onclick="toggleMode()">Change Mode</button>
+        </div>
+      
+    </div>
+    <div class="content">
+        <div class="card-grid">
+    <h1>Error {{.Code}}</h1>
+    <p>
+        {{if eq .Code 404}}
+            Oops! The page you requested could not be found.
+        {{else if eq .Code 500}}
+            Sorry! There was an internal server error. Please try again later.
+        {{else}}
+            An unexpected error occurred. Please try again.
+        {{end}}
+    </p>
+    <p>
+        <a href="/">Return to Home</a>
+    </p>
+    </div>
+    </div>
+   <script src="/static/mode.js"></script>
+</body>
+</html>
