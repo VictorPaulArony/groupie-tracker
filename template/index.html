@@ -14,10 +14,7 @@
     </div>
   
 </div>
-<div>
-    <input type="text" id="search" placeholder="Search artists..." onkeyup="performSearch()">
-    <div id="suggestions" class="suggestions-box"></div>
-</div>
+
         
     <div class="content">
         <div class="card-grid" id=" artist-List">
@@ -36,31 +33,5 @@
     </div>
 </div>
 <script src="../static/mode.js"></script>
-<script>
-    function performSearch() {
-        const query = document.getElementById('search').value;
-        if (query.length === 0) {
-            document.getElementById('suggestions').innerHTML = '';
-            return;
-        }
-
-        fetch(`/search?q=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                let suggestionsBox = document.getElementById('suggestions');
-                suggestionsBox.innerHTML = ''; // Clear previous suggestions
-
-                if (data.length > 0) {
-                    data.forEach(artist => {
-                        let suggestion = document.createElement('div');
-                        suggestion.innerHTML = `<a href="/locations/${artist.ID}">${artist.Name}</a>`;
-                        suggestionsBox.appendChild(suggestion);
-                    });
-                } else {
-                    suggestionsBox.innerHTML = '<p>No matches found</p>';
-                }
-            });
-    }
-</script>
 </body>
 </html>
