@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists and Locations</title>
+   <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+ 
+    <div class="heading"><h1>ARTISTS</h1>
+    <div class="mode">
+        <button onclick="toggleMode()">Change Mode</button>
+    </div>
+  
+</div>
+<div>
+    <input type="text" id="search" placeholder="Search artists..." onkeyup="performSearch()">
+    <div id="suggestions" class="suggestions-box"></div>
+</div>
+        
+    <div class="content">
+        <div class="card-grid" id=" artist-List">
+            {{ range . }}
+            <div>
+                <h2>{{.Name}}</h2>
+                <div class="image">
+                    <a href="/locations/{{.ID}}"><img src="{{.Image}}" alt="Image of {{.Name}}"></a>
+                </div>
+                <p><strong>Creation Date:</strong> {{.CreationDate}}</p>
+                <p><strong>First Album:</strong> {{.FirstAlbum}}</p>
+                <button> <a href="/locations/{{.ID}}">More Details</a> </button>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+<script src="../static/mode.js"></script>
+<script>
+    function performSearch() {
+        const query = document.getElementById('search').value;
+        if (query.length === 0) {
+            document.getElementById('suggestions').innerHTML = '';
+            return;
+        }
+
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                let suggestionsBox = document.getElementById('suggestions');
+                suggestionsBox.innerHTML = ''; // Clear previous suggestions
+
+                if (data.length > 0) {
+                    data.forEach(artist => {
+                        let suggestion = document.createElement('div');
+                        suggestion.innerHTML = `<a href="/locations/${artist.ID}">${artist.Name}</a>`;
+                        suggestionsBox.appendChild(suggestion);
+                    });
+                } else {
+                    suggestionsBox.innerHTML = '<p>No matches found</p>';
+                }
+            });
+    }
+</script>
+</body>
+</html>
