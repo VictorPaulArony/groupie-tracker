@@ -1,0 +1,140 @@
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #0c0c0c; 
+    background-color: #ffffff; 
+    overflow-x: hidden;
+}
+
+.heading {
+    background-color: rgb(251, 254, 255);
+    color: rgba(3, 3, 3, 0.877);
+    box-shadow: 0 2px 3px rgb(3, 3, 3);
+    padding: 20px;
+    margin-bottom: 5%;
+}
+ .heading h1{
+    font-size: 3rem;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 80%;
+    padding: 50px;
+    position: relative;
+    justify-content: space-around;
+    z-index: 1;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}   
+
+.card-grid > div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-grid > div {
+    background: rgba(255, 250, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0  4px 8px rgb(13, 13, 14);
+    overflow: hidden;
+    color: rgb(10, 10, 10);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.9rem;
+    color: #030303;
+    text-shadow: 0 1px 1px rgb(4, 155, 243);
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 1.5rem;
+    color: #050505;
+}
+
+/* Light Mode */
+.dark-mode {
+    background-color: rgb(5, 5, 5);
+    color: #f1ecec;
+}
+.dark-mode .heading {
+    background-color: #0c0c0ce1;
+    color: #ffffff;
+}
+.dark-mode .content{
+    background-color:rgb(7, 7, 7);
+    color: #fcf7f7;
+}
+.dark-mode .card-grid > div {
+    background-color: #181717;
+    border-radius: 10px;
+    box-shadow: 0  4px 8px rgb(241, 241, 243);
+    overflow: hidden;
+    color: rgb(253, 249, 249);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+.dark-mode .content p {
+    color: #ffffff;
+}
+.dark-mode .content h2{
+    font-size: 1.9rem;
+    color: #faf8f8;
+    text-shadow: 0 2px 2px rgb(4, 155, 243);
+    margin-bottom: 15px;
+}
+.card-grid > div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgb(2, 149, 247);
+}
+
+.card-grid img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(7, 7, 7, 0.1);
+}
+
+
+a {
+    color: #3498db; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 3.2rem;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+    }
+
+    p {
+        font-size: 1.8rem;
+    }
+}

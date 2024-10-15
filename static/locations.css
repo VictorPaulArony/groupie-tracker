@@ -1,0 +1,164 @@
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #0c0c0c;
+    background-color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+.heading {
+    background-color: rgb(251, 254, 255);
+    color: rgba(3, 3, 3, 0.877);
+    box-shadow: 0 2px 3px rgb(3, 3, 3);
+    padding: 20px;
+    margin-bottom: 5%;
+}
+
+.heading h1 {
+    font-size: 3rem;
+}
+
+.content {
+    padding: 20px;
+    max-width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 1.9rem;
+    margin-bottom: 20px;
+}
+
+p, li {
+    font-size: 1.5rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(7, 7, 7, 0.1);
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 20px;
+    border: 1px solid #f1eded;
+    text-align: left;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.hover-div {
+    padding: 20px;
+    background-color: rgb(253, 252, 252);
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgb(8, 8, 8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(4, 175, 243, 0.932);
+}
+
+.hover-div h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.hover-div p {
+    font-size: 1.4rem;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #030303;
+    color: #f1f1f1;
+}
+
+.dark-mode .heading {
+    background-color: #0c0c0c;
+    color: #ffffff;
+}
+
+.dark-mode .content {
+    background-color: rgb(7, 7, 7);
+    color: #fcf7f7;
+}
+
+.dark-mode .hover-div {
+    background-color: rgb(22, 20, 20);
+    color: #f1eded;
+    box-shadow: 0 4px 8px #f1f1f1;
+}
+
+.dark-mode .hover-div {
+    background-color: rgb(22, 20, 20);
+    color: #f1eded;
+    box-shadow: 0 4px 8px #f1f1f1;
+}
+.dark-mode .hover-div:hover{
+    box-shadow: 0 4px 8px #0591ee;
+}
+
+.dark-mode table th, .dark-mode table td {
+    border-color: #0c0c0c;
+}
+
+.dark-mode a {
+    color: #58a6ff;
+}
+
+.dark-mode img {
+    box-shadow: 0 4px 8px rgba(241, 241, 243, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 3.2;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+    }
+
+    p, li {
+        font-size: 1.8rem;
+    }
+
+    table th, table td {
+        padding: 20px;
+    }
+}
