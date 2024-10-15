@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Details</title>
+   <link rel="stylesheet" href="/static/locations.css">
+</head>
+<body>
+    <div class="heading">
+        <h1>ARTISTS</h1>
+        <div class="mode">
+            <button onclick="toggleMode()">Change Mode</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="band-info">
+            {{ if .Artist }}
+            <div class="hover-div">
+                <div id="artist-info">
+                    <img src="{{ .Artist.Image }}" alt="Image of {{ .Artist.Name }}">
+                    <h1>{{ .Artist.Name }}</h1>
+                </div>
+            </div>
+            {{ end }}
+        
+            {{ if .Artist.Members }}
+            <div class="hover-div">
+                <h2>Band Members</h2>
+                <ul class="members-list">
+                    {{ range .Artist.Members }}
+                    <li><strong>{{ . }}</strong></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+        </div>
+
+        <div id="locations">
+            {{ if .Location }}
+            <div class="hover-div">
+                <h2>Locations to Visit</h2>
+                <ul>
+                    {{ range .Location.Locations }}
+                    <li><strong>{{ . }}</strong></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+        </div>
+
+        <div id="dates">
+            {{ if .Date }}
+            <div class="hover-div">
+                <h2>Dates of visit</h2>
+                <ul>
+                    {{ range .Date.Dates }}
+                    <li><strong>{{ . }}</strong></li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+        </div>
+       
+        <div id="table">
+            {{ if .Relations }}
+            <div class="hover-div">
+                <h2>Performance Dates and Locations</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Dates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ range $location, $dates := .Relations.Relation }}
+                        <tr>
+                            <td>{{ $location }}</td>
+                            <td>
+                                {{ range $dates }}
+                                <div>{{ . }}</div>
+                                {{ end }}
+                            </td>
+                        </tr>
+                        {{ end }}
+                    </tbody>
+                </table>
+            </div>
+            {{ end }}
+        </div>
+        
+        <p><strong>Go Back: </strong><a href="/">Go Back</a></p>
+    </div>
+
+    <script src="/static/mode.js"></script>
+</body>
+</html>
